@@ -10,17 +10,29 @@
     <link rel="stylesheet" href="/css/main.css" th:href="@{/css/main.css}">
     <link rel="icon" type="image/png" href="/images/favicon.png" th:href="@{/images/favicon.png}">
 </head>
+
 <body>
+
+<!--    umisti tabulku do formatu    -->
 <main class="container">
+
+<!--    nazev tabulky   -->
     <h1>Seznam osob</h1>
+
+<!--    format tabulky  -->
     <table class="u-full-width">
         <thead>
+
+<!--    seznam ulozeny v RADCICH-->
         <tr>
             <th>Jméno</th>
             <th>Příjmení</th>
             <th>Datum narození</th>
         </tr>
+
         </thead>
+
+<!--    seznam ulozeny ve SLOUPCICH -->
         <tbody>
         <tr th:each="osoba: ${osoby}">
             <td th:text="${osoba.jmeno}">Jan</td>
@@ -28,7 +40,10 @@
             <td th:text="${#temporals.format(osoba.datumNarozeni, 'd. MMMM yyyy')}">1370</td>
         </tr>
         </tbody>
+
     </table>
+
+<!--    zobrazi listu ve spodni casti stranky s dalsimi strankami   -->
     <div class="pager">
         <a th:each="pageNumber : ${#numbers.sequence(0,osoby.totalPages-1)}"
            th:href="@{/(size=${osoby.size}, page=${pageNumber})}"
@@ -36,9 +51,12 @@
            class="page"
            th:classappend="${pageNumber==osoby.number} ? 'active'"></a>
     </div>
+
+<!--    tlacitko pro s funkci   -->
     <div class="controls">
         <a th:href="@{/vyber}" class="button">Výběrový formulář</a>
     </div>
+
 </main>
 </body>
 </html>
